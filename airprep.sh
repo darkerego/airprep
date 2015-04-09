@@ -9,7 +9,7 @@ airer2='Error bringing interface down, check mon int exists'
 airer3='Error: mon0 does not exist.'
 airer4='Error bringing up mon interface... check rfkill'
 macer1='Could not change mac address!'
-unknownER='Interface does not exist or blacklisted by rfkill? Unknown error.'
+unknownER='Could not bring up $interface1 Interface possibly blacklisted by rfkill.'
 logDIR="/var/log/script"
 
 if [ "$UID" -ne "$ROOT_UID" ]; then
@@ -54,7 +54,7 @@ function resetINT ()
 	echo "Reseting interface...stopping monitor mode..."
 	airmon-ng stop mon0 >> $logDIR/airprep.log || echo $airer3
 	echo "Success. Now bringing $interface1 up." || echo $unknownER
-	ifconfig $interface1 up >> $logDIR/airprep.log && echo "Done. Station mode reenabled Log located in $logDIR." || echo unknownER
+	ifconfig $interface1 up >> $logDIR/airprep.log && echo "Done. Station mode reenabled Log located in $logDIR." || echo $unknownER
 	exit
 }
 
