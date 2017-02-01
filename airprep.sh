@@ -32,6 +32,7 @@ function startMON ()
 
 	date >> $logDIR/airprep.log
 	echo "Now attempting to enable monitor mode"
+	airmon-ng check kill
 	airmon-ng start $interface1 >> $logDIR/airprep.log || echo $airer1
 	echo "Success. Bringing $interface1 down..."
 	ifconfig $interface1 down >> $logDIR/airprep.log || echo $airer2
